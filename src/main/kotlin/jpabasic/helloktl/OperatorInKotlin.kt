@@ -90,7 +90,9 @@ fun main(args: Array<String>) {
 
 }
 
-fun sumPrice(price1: Int, price2: Int): Int = price1 + price2
+//fun sumPrice(price1: Int, price2: Int): Int = price1 + price2
+// <- return 생략 / 반환타입 생략 ->
+fun sumPrice(price1: Int, price2: Int) = price1 + price2
 
 fun sumPriceId(price: Int, id: String): String {
     return "$price$id"
