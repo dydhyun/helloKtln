@@ -11,5 +11,7 @@ fun main(args: Array<String>) {
     println("Kotlin codeStyle setting")
 
     println("Setting -> Editor -> CodeStyle -> Kotlin -> SetForm -> kotlinStyleGuide")
+    // 코틀린 스타일 가이드를 따르는지 확인하는 설정하기
     println("Setting -> Editor -> Inspections -> General -> Incorrect formating")
+
 }
