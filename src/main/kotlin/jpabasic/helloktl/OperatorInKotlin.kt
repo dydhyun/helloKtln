@@ -1,6 +1,13 @@
 package jpabasic.helloktl
 
 fun main(args: Array<String>) {
+    println("Kotlin codeStyle setting")
+
+    println("Setting -> Editor -> CodeStyle -> Kotlin -> SetForm -> kotlinStyleGuide")
+    // 코틀린 스타일 가이드를 따르는지 확인하는 설정하기
+    println("Setting -> Editor -> Inspections -> General -> Incorrect formating")
+    println("========================================================================")
+
     var canWrite: Int = 10;
     val onlyRead: Int = 10;
 
@@ -10,7 +17,6 @@ fun main(args: Array<String>) {
 
     println("canWrite = " + canWrite);
     println("onlyRead = " + onlyRead);
-
     // var: 값 변경 가능
     // val: 값 변경 불가
 //*********************************************************************
@@ -34,7 +40,6 @@ fun main(args: Array<String>) {
 
     println("str1 = $str1")
     println("str2 = $str2")
-
     // 타입에 ? 를 붙여 null 값을 허용할 수 있음
 //*********************************************************************
     val s = "string"
@@ -48,6 +53,45 @@ fun main(args: Array<String>) {
     println("l = " + l::class)
     println("d = " + d::class)
     println("f = " + f::class)
-
     // 코틀린은 타입추론으로 변수의 값에 따라 타입을 알아서 지정해줌
+//*********************************************************************
+    val num: Int = 20
+
+    if(num in arrayOf(10,20,30,40)) {
+        println("contain")
+    } else{
+        println("not contain")
+    }
+    // 배열에서 값과 일치하는 결과를 찾으면 true 를 리턴하는 in
+
+    when (num) {
+        10 -> println("num is 10")
+        in 20..29 -> println("$num between 20~29")
+        else -> println("no search in range")
+    }
+    // switch 와 비슷한 역할을 하는 when
+//*********************************************************************
+    val price1: Int = 1000
+    val price2: Int = 2000
+
+    val price3 = sumPrice(price1, price2)
+
+    println(price3)
+
+    val id = "원"
+    println(sumPriceId(price3, id))
+
+    /* 코틀린의 함수는 fun 으로 시작하며,
+    fun 함수명(매개변수: 타입): 리턴타입 {
+        함수의 본문
+        return 반환값
+    }
+    와 같은 구조. */
+
+}
+
+fun sumPrice(price1: Int, price2: Int): Int = price1 + price2
+
+fun sumPriceId(price: Int, id: String): String {
+    return "$price$id"
 }
