@@ -87,7 +87,13 @@ fun main(args: Array<String>) {
         return 반환값
     }
     와 같은 구조. */
+//*********************************************************************
+    val item = Item("Book", 10_000)
 
+    println("name: ${item.name}, price: ${item.price}")
+
+    item.buy()
+    item.sell()
 }
 
 //fun sumPrice(price1: Int, price2: Int): Int = price1 + price2
@@ -96,4 +102,24 @@ fun sumPrice(price1: Int, price2: Int) = price1 + price2
 
 fun sumPriceId(price: Int, id: String): String {
     return "$price$id"
+}
+
+class Item(
+    val name: String,
+    val price: Int
+) : ItemTrade {
+    override fun buy() {
+        println("buy $name")
+    }
+
+    override fun sell() {
+//        TODO("NOT YET IMPLEMENT") 호출 시 다음 에러 발생
+//        Exception in thread "main" kotlin.NotImplementedError: An operation is not implemented: NOT YET IMPLEMENT
+        println("sell $name")
+    }
+}
+
+interface ItemTrade {
+    fun buy()
+    fun sell()
 }
