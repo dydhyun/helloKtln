@@ -1,6 +1,8 @@
 package com.example.helloKtln.blog.service
 
 import com.example.helloKtln.blog.dto.BlogDto
+import com.example.helloKtln.blog.entity.Wordcount
+import com.example.helloKtln.blog.repository.WordRepository
 import com.example.helloKtln.core.exception.InvalidInputException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
@@ -11,7 +13,9 @@ import org.springframework.web.reactive.function.client.bodyToMono
 import org.springframework.web.util.WebUtils
 
 @Service
-class BlogService {
+class BlogService (
+    val wordRepository: WordRepository
+){
     @Value("\${REST_API_KEY}")
     lateinit var restApiKey:String
 
@@ -58,8 +62,19 @@ class BlogService {
 
         val result = response.block()
 
+        // searchKeyword to lowercase and count
+        val lowQuery: String = blogDto.query!!.lowercase()
+
+        val word: Wordcount = wordRepository.findById(lowQuery).orElse(Wordcount(lowQuery))
+
+        word.cnt++
+
+        wordRepository.save(word)
+
         return result
     }
+
+    fun searchWordRank(): List<Wordcount> = wordRepository.findTop10ByOrderByCntDesc()
 }
 
 //curl -v -G GET "https://dapi.kakao.com/v2/search/blog" \
