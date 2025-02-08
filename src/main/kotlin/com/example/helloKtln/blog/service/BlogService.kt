@@ -18,26 +18,25 @@ class BlogService {
     fun searchKakao(blogDto: BlogDto): String? {
 //        println(blogDto.toString())
 //        return "SearchKakao"
-
-        val msgList = mutableListOf<ExceptionMsg>()
-
-        if (blogDto.query.trim().isEmpty()){
-            msgList.add(ExceptionMsg.EMPTY_QUERY)
-        }
-
-        if (blogDto.sort.trim() !in arrayOf("ACCURACY","RECENCY")){
-            msgList.add(ExceptionMsg.NOT_IN_SORT)
-        }
-
-        when {
-            blogDto.page < 1 -> msgList.add(ExceptionMsg.LESS_THEN_MIN)
-            blogDto.page > 50 -> msgList.add(ExceptionMsg.MORE_THEN_MAX)
-        }
-
-        if (msgList.isNotEmpty()){
-            val message = msgList.joinToString { it.msg }
-            throw InvalidInputException(message)
-        }
+//        val msgList = mutableListOf<ExceptionMsg>()
+//
+//        if (blogDto.query.trim().isEmpty()){
+//            msgList.add(ExceptionMsg.EMPTY_QUERY)
+//        }
+//
+//        if (blogDto.sort.trim() !in arrayOf("ACCURACY","RECENCY")){
+//            msgList.add(ExceptionMsg.NOT_IN_SORT)
+//        }
+//
+//        when {
+//            blogDto.page < 1 -> msgList.add(ExceptionMsg.LESS_THEN_MIN)
+//            blogDto.page > 50 -> msgList.add(ExceptionMsg.MORE_THEN_MAX)
+//        }
+//
+//        if (msgList.isNotEmpty()){
+//            val message = msgList.joinToString { it.msg }
+//            throw InvalidInputException(message)
+//        }
 
         val webClient = WebClient
             .builder()
@@ -67,9 +66,9 @@ class BlogService {
 //--data-urlencode "query=https://brunch.co.kr/@tourism 집짓기" \
 //-H "Authorization: KakaoAK ${REST_API_KEY}"
 
-private enum class ExceptionMsg(val msg:String){
-    EMPTY_QUERY("query parameter required"),
-    NOT_IN_SORT("sort parameter one of accuracy and recency"),
-    LESS_THEN_MIN("page is less than min"),
-    MORE_THEN_MAX("page is more than max")
-}
+//private enum class ExceptionMsg(val msg:String){
+//    EMPTY_QUERY("query parameter required"),
+//    NOT_IN_SORT("sort parameter one of accuracy and recency"),
+//    LESS_THEN_MIN("page is less than min"),
+//    MORE_THEN_MAX("page is more than max")
+//}
