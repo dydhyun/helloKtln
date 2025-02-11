@@ -1,6 +1,8 @@
 package com.example.helloKtln.blog.controller
 
 import com.example.helloKtln.blog.dto.User
+import com.example.helloKtln.blog.repository.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,11 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod
 @Controller
 class FormHtmlController {
 
+    @Autowired
+    lateinit var userRepository: UserRepository
+
     @RequestMapping("/form","/form/{userId}", method = [RequestMethod.GET, RequestMethod.POST])
     fun form(@PathVariable("userId")userId: Long?, user: User?, model: Model):String{
 
         user?.let{
-            println(user)
+            userRepository.save(it)
+//            userRepository.save(user)
 
             val initUser = User()
 
