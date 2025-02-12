@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/form/asset/css/search.css}">
+
+    <script>
+        async function searchBlog(event) {
+            event.preventDefault();  // 폼 제출 방지
+
+            let query = document.getElementById("query").value;
+            let resultDiv = document.getElementById("searchResult");
+
+            if (!query.trim()) {
+                alert("검색어를 입력하세요!");
+                return;
+            }
+
+            let response = await fetch("/api/blog/search", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(query)
+            });
+
+            if (response.ok) {
+                let data = await response.json();
+                resultDiv.innerHTML = "<h3>검색 결과:</h3>" + data.searchResults;
+            } else {
+                resultDiv.innerHTML = "<h3>검색 실패</h3>";
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <h1>Searching Home</h1>
+    <h5><a th:href="@{/logout}">로그아웃</a></h5>
+
+    <div class="search-container">
+<!--        <form th:action="@{/api/blog/search}" th:method="POST">-->
+        <form onsubmit="searchBlog(event)">
+            <input type="text" id="query" name="query" class="search-input" placeholder="검색 키워드 입력">
+            <button type="submit" class="search-button">🔍</button>
+        </form>
+    </div>
+    <div id="searchResult"></div>
+
+</div>
+</body>
+</html>
