@@ -16,30 +16,33 @@ data class User(
     var id: Long? = null,
     var name: String? = null,
     var email: String? = null,
-    var password: String? = null
-) : UserDetails{
+    var pswd: String? = null
+) : UserDetails {
     var role = ROLE_TYPE.MEMBER
 
     override fun getUsername(): String = name!!
 
-    override fun getPassword(): String = password!!
+    override fun getPassword(): String = pswd!!
 
+    // 계정 만료 안됨으로 리턴
     override fun isAccountNonExpired(): Boolean = true
 
+    // 계정 잠김 않음으로 리턴
     override fun isAccountNonLocked(): Boolean = true
 
+    // 비밀번호 만료 안됨으로 리턴
     override fun isCredentialsNonExpired(): Boolean = true
 
+    // 계정 활성화 됨으로 리턴
     override fun isEnabled(): Boolean = true
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val authorities = mutableListOf<GrantedAuthority>()
 
-        when(role){
+        when (role) {
             ROLE_TYPE.ADMIN -> authorities.add(SimpleGrantedAuthority("ROLE_ADMIN"))
             ROLE_TYPE.MEMBER -> authorities.add(SimpleGrantedAuthority("ROLE_MEMBER"))
         }
-
         return authorities
     }
 
