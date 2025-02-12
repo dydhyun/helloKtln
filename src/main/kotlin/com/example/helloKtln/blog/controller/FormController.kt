@@ -4,6 +4,7 @@ import com.example.helloKtln.blog.dto.User
 import com.example.helloKtln.blog.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -24,7 +25,7 @@ class FormHtmlController {
 
         val user = if (userId == null) {
             User(null, null, null, null)
-        } else{
+        } else {
             userRepository.findByIdOrNull(userId)
         }
 
@@ -37,6 +38,8 @@ class FormHtmlController {
     fun postForm(user: User?, model: Model): String {
 
         user?.let {
+            var bcrypt = BCryptPasswordEncoder(11)
+            it.pswd = bcrypt.encode(it.pswd)
             userRepository.save(it)
 //            userRepository.save(user)
         }
