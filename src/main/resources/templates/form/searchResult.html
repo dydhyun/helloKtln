@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>search Result</title>
-</head>
-<body>
-<h1>검색 결과</h1>
+<!--<!DOCTYPE html>-->
+<!--<html lang="ko" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>검색 결과</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>검색 결과</h1>-->
 
-<div th:if="${searchResults}">
-    <p>검색 키워드: <span th:text="${searchResults.query}"></span></p>
-    <p>결과: <span th:text="${searchResults.result}"></span></p> <!-- 적절한 프로퍼티로 변경 -->
-</div>
+<!--<div th:if="${searchResults}">-->
+<!--    <h2>총 결과 개수: <span th:text="${searchResults.meta.total_count}"></span></h2>-->
 
-<div th:unless="${searchResults}">
-    <p>검색 결과가 없습니다.</p>
-</div>
-
-<a href="/form">다시 검색하기</a> <!-- 다시 검색할 수 있는 링크 -->
-</body>
-</html>
+<!--    <div th:each="doc : ${searchResults.documents}">-->
+<!--        <h3 th:text="${doc.title}"></h3>-->
+<!--        <p th:text="${doc.contents}"></p>-->
+<!--        <p>블로그명: <span th:text="${doc.blogname}"></span></p>-->
+<!--        <p>작성일: <span th:text="${doc.datetime}"></span></p>-->
+<!--        <a th:href="${doc.url}" target="_blank">원문 보기</a>-->
+<!--        <hr>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div th:if="${searchResults == null}">-->
+<!--    <p>검색 결과가 없습니다.</p>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
