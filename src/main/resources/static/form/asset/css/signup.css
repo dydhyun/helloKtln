@@ -69,3 +69,10 @@ h1 {
     color: #007BFF; /* 링크 색상 파란색 */
     text-decoration: none;
 }
+
+.userInfoDiv {
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    border: 1px solid #0056b3;
+}
