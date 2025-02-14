@@ -1,4 +1,4 @@
-package com.example.helloKtln.blog.controller
+package com.example.helloKtln.blog.controllerrest
 
 import com.example.helloKtln.blog.dto.BlogDto
 import com.example.helloKtln.blog.entity.Wordcount
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("/api/blog")
 @RestController
-class BlogController(
+class BlogRestController(
     val blogService: BlogService
 ) {
     @GetMapping("")
