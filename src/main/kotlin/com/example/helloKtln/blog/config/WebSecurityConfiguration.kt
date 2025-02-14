@@ -21,7 +21,8 @@ class WebSecurityConfiguration {
 
     // 비밀번호 암호화 설정
     @Bean
-    fun encoder(): BCryptPasswordEncoder = BCryptPasswordEncoder(11)
+    fun encoder(): BCryptPasswordEncoder = BCryptPasswordEncoder(10)
+    // 기본 강도가 10
 
     // DaoAuthenticationProvider 설정
     @Bean
@@ -45,11 +46,15 @@ class WebSecurityConfiguration {
             .csrf { it.disable() } // CSRF 보안 해제
             .authorizeHttpRequests {
                 it.requestMatchers("/form/**", "/resources/**").permitAll() // 리소스는 인증 없이 접근 가능
+                it.requestMatchers("/admin").hasRole("ADMIN")
+                it.requestMatchers("/member").hasAnyRole("MEMBER", "ADMIN")
                 it.anyRequest().authenticated() // 그 외 모든 요청은 인증 필요
             }
             .formLogin { // 로그인 설정
                 it.loginPage("/login") // 커스텀 로그인 페이지 지정
                 it.defaultSuccessUrl("/home", true) // 로그인 성공 시 이동할 URL
+//                it.usernameParameter("username")
+//                it.passwordParameter("password") 기본필드로 다음과 같이 설정
                 it.permitAll()
             }
             .logout { // 로그아웃 설정
